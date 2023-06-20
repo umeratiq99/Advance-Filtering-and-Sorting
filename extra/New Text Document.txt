@@ -1,0 +1,32 @@
+Introduction
+The purpose of this technical report is to describe and implement the advanced search and filtering feature, and sorting options, which is designed to enhance data exploration and analysis. This feature allows users to efficiently search through a data dump and apply advanced filters to narrow down their results based on specific criteria. Additionally, various sorting options are available to organize the data in a desired order.
+Objective
+The objectives of the feature are to:
+•	Efficiently search and retrieve subsets of data that match their defined search criteria.
+•	Explore large datasets and extract relevant information quickly and accurately.
+•	Facilitate data analysis by organizing and sorting data based on different criteria.
+Technical Scoping
+Architecture:
+Express.js framework will be used for handling HTTP requests and responses. Node.js will serve as the runtime environment for executing the server-side code. The application will interact with a PostgreSQL database, which will store the data dump for efficient searching and filtering.
+Database Design:
+The PostgreSQL database will be designed to accommodate the data dump and support efficient search and filtering operations. The tables and columns will be organized to align with the search criteria, including the description, first name, and last name fields.
+The Sequelize package will be utilized as an Object-Relational Mapping (ORM) tool to facilitate the interaction between the Node.js application and the PostgreSQL database. 
+Validation:
+For validation of the query params, we will be using the express-validator package.
+Implementation Details
+Setting up the Project:
+•	Install Node.js and initialize a new project using npm or yarn.
+•	Install Express.js and create the basic project structure.
+•	Install Sequelize, Sequelize CLI, pg, and pg-hstore packages, express-validator.
+Database Configuration:
+•	Create a PostgreSQL database and configure the connection details in the project.
+•	Define Sequelize models for the tables in the database, including the necessary columns.
+Implementing the Search and Filtering Endpoints:
+•	Create routes and controllers in Express.js to handle search and filtering requests.
+•	Utilize the express-validator package to validate user input and ensure data integrity.
+•	Implement Sequelize queries to perform advanced filtering based on the specified search criteria.
+•	Retrieve the matching subset of data from the database and return the results as an HTTP response.
+Sorting Options:
+•	Extend the existing routes and controllers to handle sorting options.
+•	Implement Sequelize queries to sort the retrieved data based on the selected sorting criteria.
+•	Return the sorted data as part of the HTTP response.

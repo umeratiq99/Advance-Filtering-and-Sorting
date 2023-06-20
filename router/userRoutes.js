@@ -6,7 +6,6 @@ const { query, validationResult } = require("express-validator");
 
 const validateResult = (req, res, next) => {
   const error = validationResult(req);
-  // console.log(error);
   if (!error.isEmpty()) {
     const messages = error.errors.map((e) => e.msg);
     res.send(messages);
@@ -16,7 +15,7 @@ const validateResult = (req, res, next) => {
 };
 
 
-//testing
+//Single API for Sorting Searching And Pagination
 router.get(
   "/",
   [
@@ -42,7 +41,6 @@ router.get(
       .isString()
       .withMessage("order should be string")
       .custom((value) => {
-        console.log(value);
         if (value !== "ASC" && value !== "DESC") {
           throw new Error(
             "Incorrect Value for order: ASC for ascending and DESC for Descending"
@@ -58,7 +56,6 @@ router.get(
       .isString()
       .withMessage("orderby should be string")
       .custom((value) => {
-        console.log(value);
         if (value !== "fname" && value !== "createdAt") {
           throw new Error(
             "Incorrect Value for orderby: firstname for User's first name and createddate for Ordering by date"
@@ -121,7 +118,6 @@ router.get(
       }
       options.where={[Op.or]:arr};
     }
-      console.log(options.where); 
       const users = await Users.findAndCountAll(options);
       const pages = parseInt(users.count);
       res.send({
@@ -134,57 +130,6 @@ router.get(
   }
 );
 
-// // if(error.message==="skip")
-// {skip = defValueSkip;}
-// // if(error.message==="take")
-//  {take = defValueTake;}
-
-// router.get('/getUserByName', async(req, res)=>{
-//   const users = await Users.findOne({where: {fname: req.query.name}});
-//   res.send({
-//     users: users
-//   });
-// })
-
-//Orignial
-// router.get("/", [query('skip').optional().isInt({min:0}), query('take').optional().isInt({min:0})], async (req, res) => {
-//   try {
-//   let skip = Number.parseInt(req.query.skip);
-//   let take = Number.parseInt(req.query.take);
-//   const defValueSkip = 0;
-//   const defValueTake = 10;
-//   if(!query('skip').notEmpty()){
-//     skip = defValueSkip;
-//   }
-//   if(!query('take').notEmpty()){
-//     take = defValueTake;
-//   }
-
-//   let order = req.query.order;
-//   const n="AB"
-//     const users = await Users.findAndCountAll({
-//       limit: take,
-//       offset: skip,
-//       where :{
-//         [Op.or]:[
-//           {fname: {[Op.like]: `%${n}%`}},
-//           //{lname: "AABA"},
-//           //{description: "ZZZW"}
-//         ]
-//       },
-//       order: [
-//         ["fname", order], //ASC of aces and DESC for descending
-//       ],
-//     });
-//     const pages = parseInt(users.count);
-//     res.send({
-//       content: users.rows,
-//       Count: pages,
-//     });
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// });
 router.delete("/", async (req, res) => {
   try {
     const deleted = await Users.destroy({

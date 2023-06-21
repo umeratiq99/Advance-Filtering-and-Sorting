@@ -17,7 +17,7 @@ const getData=async (req, res) => {
       }
       if (req.query.order) {
         {
-          options.order = [[req.query.orderby || "fname", req.query.order]];
+          options.order = [[req.query.orderby || "fname", req.query.order]]; 
         }
       }
       if(req.query.fname || req.query.lname || req.query.desc){

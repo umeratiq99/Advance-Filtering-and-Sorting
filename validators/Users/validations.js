@@ -1,14 +1,13 @@
 const { query, validationResult } = require("express-validator");
 
-
 const validations = [
   query("skip")
     .optional()
     .trim()
     .notEmpty()
     .withMessage("skip cannot be empty")
-    .isInt({ min: 0 })
-    .withMessage("Skip should be an Integer"),
+    .isInt({ min: 0 , max : 250000})
+    .withMessage("Skip should be an Integer, Skip should be less than 250k"),
   query("take")
     .optional()
     .trim()
@@ -23,6 +22,7 @@ const validations = [
     .withMessage("order cannot be empty")
     .isString()
     .withMessage("order should be string")
+    .toUpperCase()
     .custom((value) => {
       if (value !== "ASC" && value !== "DESC") {
         throw new Error(
@@ -41,7 +41,7 @@ const validations = [
     .custom((value) => {
       if (value !== "fname" && value !== "createdAt") {
         throw new Error(
-          "Incorrect Value for orderby: fname for User's first name and creatAt for Ordering by date"
+          "Incorrect Value for orderby: fname for User's first name and createdAt for Ordering by date"
         );
       }
       return true;
@@ -79,4 +79,4 @@ const validateResult = (req, res, next) => {
   }
 };
 
-module.exports={ validations , validateResult }
+module.exports = { validations, validateResult };

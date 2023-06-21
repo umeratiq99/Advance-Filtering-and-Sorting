@@ -19,6 +19,5 @@ const Users = sq.define("users", {    //first arguement todo is the table name
     },
   });
 
-  Users.sync();
 
   module.exports=Users;

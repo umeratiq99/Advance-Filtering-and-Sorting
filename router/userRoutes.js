@@ -1,9 +1,15 @@
 const express = require("express");
-const router = express.Router();
+//Controllers
 const { getData, deleteAll } = require("../controllers/controllers");
+//Local Modules for validations
 const { validations , validateResult }=require("../validators/Users/validations");
 
-//Single API for Sorting Searching And Pagination
+// Initialization
+const router = express.Router();
+
+//Requests
+
+//Single API for Sorting Searching And Pagination takes in different query params and return relevent data
 router.get("/", validations, validateResult, getData);
 
 //Delete All data in DB

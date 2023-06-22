@@ -1,12 +1,13 @@
 const { query, validationResult } = require("express-validator");
 
+// Query validatons
 const validations = [
   query("skip")
     .optional()
     .trim()
     .notEmpty()
     .withMessage("skip cannot be empty")
-    .isInt({ min: 0 , max : 250000})
+    .isInt({ min: 0, max: 250000 })
     .withMessage("Skip should be an Integer, Skip should be less than 250k"),
   query("take")
     .optional()
@@ -69,6 +70,7 @@ const validations = [
     .withMessage("description should be a String"),
 ];
 
+//Validating Results
 const validateResult = (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {

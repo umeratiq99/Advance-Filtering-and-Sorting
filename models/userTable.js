@@ -1,9 +1,10 @@
+// Table Schema in DB
 const sq=require('../config/dbconfig');
 const {DataTypes}=require('sequelize');
 
 //Creating Table in DB
-const Users = sq.define("users", {    //first arguement todo is the table name
-    id: {                        // todo_id here is the name of column
+const Users = sq.define("users", {    //first arguement users is the table name in DB
+    id: {                        // id here is the name of column
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,

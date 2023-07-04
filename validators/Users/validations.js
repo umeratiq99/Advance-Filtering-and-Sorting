@@ -2,6 +2,13 @@ const { query, validationResult } = require("express-validator");
 
 // Query validatons
 const validations = [
+    query("find")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("find cannot be empty")
+    .isString()
+    .withMessage("find should be string"),
   query("skip")
     .optional()
     .trim()
@@ -32,42 +39,6 @@ const validations = [
       }
       return true;
     }),
-  query("orderby")
-    .optional()
-    .trim()
-    .notEmpty()
-    .withMessage("orderby cannot be empty")
-    .isString()
-    .withMessage("orderby should be string")
-    .custom((value) => {
-      if (value !== "fname" && value !== "createdAt") {
-        throw new Error(
-          "Incorrect Value for orderby: fname for User's first name and createdAt for Ordering by date"
-        );
-      }
-      return true;
-    }),
-  query("fname")
-    .optional()
-    .trim()
-    .notEmpty()
-    .withMessage("fname cannot be empty")
-    .isString()
-    .withMessage("fname should be a String"),
-  query("lname")
-    .optional()
-    .trim()
-    .notEmpty()
-    .withMessage("lname cannot be empty")
-    .isString()
-    .withMessage("lname should be a String"),
-  query("description")
-    .optional()
-    .trim()
-    .notEmpty()
-    .withMessage("description cannot be empty")
-    .isString()
-    .withMessage("description should be a String"),
 ];
 
 //Validating Results

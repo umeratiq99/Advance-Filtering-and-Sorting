@@ -1,9 +1,10 @@
 const express = require("express");
-const userRoutes = require("./router/userRoutes");
+const userRoutes = require("./router/blogRoutes");
+// const sequelize = require("./config/dbconfig")
 
 const app = express();
 
-app.use("/users", userRoutes);
+app.use("/blogs", userRoutes);
 
 const server=app.listen(3000, () => {
   console.log("Server is running on port 3000");

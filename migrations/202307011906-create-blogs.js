@@ -3,18 +3,34 @@
 // Migration Schema 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable("blogs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      fname: {
+      title: {
         type: Sequelize.STRING,
       },
-      lname: {
+      desription: {
         type: Sequelize.STRING,
+      },
+      genreid: {
+        type: Sequelize.INTEGER,
+        allowNull : false,
+        refrence: {
+          model : "genres",
+          key : "id"
+        }
+      },
+      userid: {
+        type: Sequelize.INTEGER,
+        allowNull : false,
+        refrence: {
+          model : "users",
+          key : "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -27,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("blogs");
   },
 };

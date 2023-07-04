@@ -1,30 +1,21 @@
 const Users = require("../models/userTable");
-const userServices = require("../services/userServices");
-
+const blogs=require("../services/blogs")
 // Methods to be executed on routes
-
+let data;
 // this function builds up an object to find relevent data
 const getData = async (req, res) => {
   try {
-    const data = await userServices(req.query);
-    console.log(data);
+    if(req.query.find){
+       data=await blogs(req.query);
+    }
+
+    // console.log(data);
     res.send(data);
   } catch (err) {
     res.send(err.message);
   }
 };
 
-//Method to Delete all data in DB
-const deleteAll = async (req, res) => {
-  try {
-    const deleted = await Users.destroy({
-      where: {},
-    });
-    res.json("All Data Deleted");
-  } catch (err) {
-    console.error(err.message);
-  }
-};
 
 // Exporting all Methods as Object
-module.exports = { getData, deleteAll };
+module.exports =  getData;
